@@ -1,7 +1,12 @@
+<?php
+$login = "login.php";
+$signup = "signup.php";
+?>
+
 <div id="navbar">
     <ul>
-        <li><a href="login.php">Connexion</a></li>
-        <li><a href="index.php">S'inscrire</a></li>
+        <li><a href=<?php echo $login ?>>Connexion</a></li>
+        <li><a href=<?php echo $signup ?>>S'inscrire</a></li>
     </ul>
 </div>
 

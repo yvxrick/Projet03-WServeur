@@ -8,9 +8,10 @@ require "footers/footer.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
+    <title>S'inscrire</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://projet03-wserveur.alwaysdata.net/public/css/signup-in.css" rel="stylesheet">
 </head>
 
 <body>
@@ -112,7 +113,7 @@ require "footers/footer.php";
                 formData.append("email-confirm", email_confirm);
                 formData.append("password", passwd);
 
-                fetch("http://localhost/projet03/app/auth/sign_up.php", {
+                fetch("https://projet03-wserveur.alwaysdata.net/app/auth/sign_up.php", {
                     method: "POST",
                     body: formData
                 }).then(data => data.text())
@@ -164,52 +165,8 @@ require "footers/footer.php";
             let status_msg_div = document.querySelector("#sign-up-status-msg")
             status_msg_div.hidden = true
         }
-
-
-
-
     </script>
 </body>
-<style>
-    #container {
-        display: flex;
-        flex-direction: column;
-        background-color: aliceblue;
-        max-width: 600px;
-        margin: auto;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
-    }
 
-    #container input {
-        margin-bottom: 10px;
-    }
-
-    #header {
-        margin-bottom: 20px;
-        font-size: 20px;
-    }
-
-    .invalid-fields {
-        color: red;
-    }
-
-    #sign-up-status-msg {
-        font-size: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-wrap: 1px;
-        width: 600px;
-        height: 100px;
-        background-color: rgba(88, 252, 96, 1);
-        max-width: 600px;
-        margin: auto;
-        margin-bottom: 15px;
-        border-radius: 10px;
-        padding: 10px;
-    }
-</style>
 
 </html>

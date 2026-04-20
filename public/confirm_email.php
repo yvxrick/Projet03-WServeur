@@ -4,10 +4,10 @@ if (isset($_GET["token"])) {
     $token = $_GET["token"];
     switch (authenticate_email($token)) {
         case "OK":
-            echo "Votre courriel à été confirmé. Vous pouvez maintenant vous connecté.";
+            require "../public/email_confirmed.php";
             break;
         case "This email is already verified.":
-            echo "Ce courriel à déjà été vérifié.";
+            require "../public/email_already_confirmed.php";
             break;
         default:
             header("HTTP/1.0 400");

@@ -1,10 +1,10 @@
 <?php
-header("Access-Control-Allow-Origin: *");
 require "../email/email.php";
 require "../database/database.php";
 
 $con = Database::Connect();
 $email_to_validate = 0;
+$zero = 0;
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -52,11 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     $user_hash = bin2hex(random_bytes(16));
-
-    $query = "INSERT INTO utilisateurs(Courriel, MotDePasse, Statut, AutresInfos) VALUES (?, ?, ?, ?)";
+    
+    // Creates new user in DB
+    $query = "INSERT INTO utilisateurs(Courriel, MotDePasse, Statut, AutresInfos, NbConnexions, Creation) VALUES (?, ?, ?, ?, ?, NOW())";
     $stmt = $con->prepare($query);
-    $stmt->bind_param("ssis", $email, $password, $email_to_validate, $user_hash);
+    $stmt->bind_param("ssisi", $email, $password, $email_to_validate, $user_hash, $zero);
     $stmt->execute();
+
 
     $email_obj = new email();
     if ($email_obj->send_confirmation_email($email, $user_hash)) {

@@ -1,7 +1,6 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . "/Projet03/app/database/database.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/app/database/database.php";
 $con = Database::Connect();
-header("Access-Control-Allow-Origin: *");
 function authenticate_email($token) {
     global $con;
 
@@ -15,10 +14,10 @@ function authenticate_email($token) {
     $user_status = intval($info["Statut"]);
 
     // Email is already verified
-    if ($user_status === 1) {
+    if ($user_status === 9) {
         return "This email is already verified.";
     }
-    $query = "UPDATE utilisateurs SET statut = 1 WHERE NoUtilisateur = '$user_id'";
+    $query = "UPDATE utilisateurs SET statut = 9 WHERE NoUtilisateur = '$user_id'";
     $con->query($query);
     return "OK";    
 }

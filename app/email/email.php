@@ -20,13 +20,14 @@ class email
         $this->mail->Password = 'bjzu lvag tuvf yraj';
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->mail->Port = 465;
+        $this->mail->CharSet = "UTF-8";
     }
 
     /**
      * Envoie un courriel.
      * Le message accepete le format HTML.
      * @param string $to L'adresse courriel du receveur
-     * @param string $subjet Le sujet du courriel
+     * @param string $subject Le sujet du courriel
      * @param string $message Le message du courriel
      * @return boolean
      */
@@ -48,14 +49,13 @@ class email
     }
     /**
      * Envoie un message de confirmation de courriel.
-     * @param mixed $to
-     * @param mixed $user_hash
+     * @param string $to
+     * @param string $token
      * @return mixed Retourne `True` si le email de confirmation à été envoyé, sinon `False`
      */
     public function send_confirmation_email($to, $token)
     {
-        $con = Database::Connect();
-        $link = sprintf("http://localhost/projet03/public/confirm_email.php?token=%s", $token);
+        $link = sprintf("https://projet03-wserveur.alwaysdata.net/public/confirm_email.php?token=%s", $token);
 
         $this->mail->setFrom("riratsey@gmail.com", "Les petites annonces GG");
         $this->mail->addAddress($to);
@@ -65,6 +65,27 @@ class email
         $this->mail->Body = "<h2> Confirmation de courriel </h2>
                             Pour confirmer votre adresse courriel <b> $to </b>, veuillez cliquer sur le lien si-dessous: <br>
                             <a href='$link'> Confirmer mon adresse courriel </a>";
+        try {
+            $this->mail->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    /**
+     * Summary of send_forgot_passwd_email
+     * @param string $passwd
+     * @param string $to
+     * @return mixed Retourne `True` si le email de réinitialisation à été envoyé, sinon `False`
+     */
+    public function send_forgot_passwd_email($to, $passwd)
+    {
+        $this->mail->setFrom("riratsey@gmail.com", "Les petites annonces GG");
+        $this->mail->addAddress($to);
+        $this->mail->isHTML(true);
+
+        $this->mail->Subject = "Réinitialisation de mot de passe";
+        $this->mail->Body = "<h2> Mot de passe </h2> <p> Voici votre mot de passe: $passwd </p>";
         try {
             $this->mail->send();
             return true;
