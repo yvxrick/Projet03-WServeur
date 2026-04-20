@@ -43,9 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         die();
     }
 
-    // Hash the password after validating it
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
     // Verify if email is already taken
     $con->query("SELECT * FROM utilisateurs WHERE Courriel = '$email'");
     if ($con->affected_rows > 0) {
