@@ -32,7 +32,7 @@ CREATE TABLE utilisateurs (
 
 
 CREATE TABLE connexions (
-    NoConnexion INT(4) PRIMARY KEY,
+    NoConnexion INT(4) AUTO_INCREMENT PRIMARY KEY,
     NoUtilisateur INT(3),
     Connexion DATETIME,
     Deconnexion DATETIME,

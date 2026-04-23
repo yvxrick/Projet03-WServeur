@@ -159,7 +159,6 @@ require "footers/footer.php";
                 status_msg_tag.innerHTML = `Vous avez été inscrit, mais l'envoie du courriel à échoué. <br> Veuillez contacter un administrateur pour confirmer votre adresse courriel.`
                 status_msg_div.hidden = false
             }
-            console.log(msg)
         }
         function closeStatusMsg() {
             let status_msg_div = document.querySelector("#sign-up-status-msg")
