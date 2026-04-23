@@ -1,6 +1,6 @@
 <?php
-require "../email/email.php";
-require "../database/database.php";
+require_once "../email/email.php";
+require_once "../database/database.php";
 
 $con = Database::Connect();
 $email_to_validate = 0;

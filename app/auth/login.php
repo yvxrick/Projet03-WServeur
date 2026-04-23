@@ -1,6 +1,6 @@
 <?php
-require "../database/user.php";
-require "../functions/session_manager.php";
+require_once "../database/user.php";
+require_once "../functions/session_manager.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $email = $_POST["email"] ?? null;

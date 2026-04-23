@@ -1,12 +1,13 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . "app/database/user.php";
 $login_page_link = "https://projet03-wserveur.alwaysdata.net/index.php?p=login";
+session_start(); // Starts session globally.
 /**
  * Logs out a user by destroying his session.
  * @return bool
  */
 function logout_user()
 {
-    session_start();
     session_unset();
     session_destroy();
 
@@ -34,7 +35,6 @@ function login_user($id = null, $email = null) {
         return false;
     }
 
-    session_start();
     $_SESSION["user_id"] = $id;
     $_SESSION["email"] = $email;
     return true;
@@ -46,7 +46,6 @@ function login_user($id = null, $email = null) {
  */
 function logout_if_no_session() {
     global $login_page_link;
-    session_start();
     if (!(isset($_SESSION["user_id"]))) {
         logout_user();
         header("Location: $login_page_link");
@@ -60,9 +59,38 @@ function logout_if_no_session() {
  * @return bool
  */
 function user_is_logged_in() {
-    session_start();
     if (isset($_SESSION) && count($_SESSION) > 0) {
         return true;
     }
     return false;
+}
+
+/**
+ * Redirige l'utilisateur s'il n'a pas encore de profil.
+ * @param mixed $user_email
+ * @param mixed $user_id
+ * @return bool
+ */
+function redirect_if_no_profile($user_email, $user_id) {
+    $user_obj = new user($user_email);
+    if (!($user_obj->has_filled_profile())) {
+        header(sprintf("Location: profil.php?id=%d", $user_id));
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Redirige l'utilisateur vers un page HTTP 403 s'il n'a pas le droit d'accéder à la page demandé.
+ * @param mixed $id_to_access
+ * @return bool
+ */
+function can_access_page($id_to_access) {
+    $id_to_access = intval($id_to_access);
+    $user_id = intval($_SESSION["user_id"]);
+    if ($id_to_access !== $user_id) {
+        header("Location: forbidden.html");
+        return false;
+    }
+    return true;
 }

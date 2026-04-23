@@ -1,5 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . "/app/database/database.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/app/database/database.php";
 $con = Database::Connect();
 function authenticate_email($token) {
     global $con;
