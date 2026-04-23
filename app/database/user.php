@@ -69,11 +69,11 @@ class user {
     }
     
     /**
-     * Retorune le statut de l'utilisateur.
+     * Retorune le numéro d'employé de l'utilisateur.
      */
-    public function get_statut_employe() {
+    public function get_no_employe() {
         if ($this->exists()) {
-            return $this->con->query(sprintf("SELECT Statut FROM utilisateurs WHERE Courriel = '%s'", $this->email))->fetch_row()[0];
+            return $this->con->query(sprintf("SELECT NoEmpl FROM utilisateurs WHERE Courriel = '%s'", $this->email))->fetch_row()[0];
         }
         return false;
     }

@@ -63,7 +63,7 @@
         margin: auto;
         margin-bottom: 15px;
         border-radius: 10px;
-        padding: 10px;     
+        padding: 10px;
     }
 
     #log-in-status-msg {
@@ -81,7 +81,7 @@
         border-radius: 10px;
         padding: 10px;
     }
-    
+
     #required {
         color: red;
     }
@@ -89,3 +89,72 @@
     #legend {
         font-size: 12px;
     }
+
+
+    .ads-container {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    .ad-card {
+        width: 200px;
+        height: 250px;
+        padding: 10px;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+    }
+
+    .ad-card:hover {
+        transform: translateY(+3px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        cursor: grab;
+    }
+
+    .ad-card img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    /* Text styles */
+    .ad-card p {
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    /* Hierarchy */
+    .ad-title {
+        font-weight: bold;
+        font-size: 13px;
+        color: #222;
+    }
+
+    .ad-price {
+        font-weight: bold;
+        color: #2ecc71;
+        font-size: 13px;
+    }
+
+    .ad-author,
+    .ad-category,
+    .ad-sm-desc {
+        font-size: 11px;
+        color: #666;
+    }
+
+    

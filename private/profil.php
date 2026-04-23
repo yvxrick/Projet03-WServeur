@@ -3,10 +3,18 @@ $page = basename(__FILE__, ".php");
 require_once "../app/functions/session_manager.php";
 require "./navbars/navigation_signed_in.php";
 
-$user_obj = new user($_SESSION["email"]);
-$id = $_GET["id"] ?? null;
-can_access_page($id);
+$user_email = $_SESSION["email"];
+$user_obj = new user($user_email);
 logout_if_no_session();
+
+$fname = $user_obj->get_prenom();
+$lname = $user_obj->get_nom();
+$courriel = $user_obj->get_email();
+$statut = $user_obj->get_statut();
+$no_empl = $user_obj->get_no_employe();
+$no_tel_maison = $user_obj->get_tel_maison();
+$no_tel_travail = $user_obj->get_tel_travail();
+$no_tel_cell = $user_obj->get_tel_cellulaire();
 ?>
 
 <!DOCTYPE html>
@@ -24,17 +32,17 @@ logout_if_no_session();
     <div id="container">
         <p id="header" style="text-align: center;">Mon profil</p>
         <p>Statut d'employé</p> <?php ?>
-        <p>No. d'employé</p> <input name="no-employe" class="form-control" style="width: 100px;" type="number" value="<?php ?>">
-        <p>Nom de famille <span id="required">*</span> </p> <input id="nom-famille" name="nom-famille" class="form-control" style="width: 250px; margin-bottom: 0px;" type="text" value="<?php ?>">
+        <p>No. d'employé</p> <input name="no-employe" class="form-control" style="width: 100px;" type="number" value="<?php echo $no_empl ?>">
+        <p>Nom de famille <span id="required">*</span> </p> <input id="nom-famille" name="nom-famille" class="form-control" style="width: 250px; margin-bottom: 0px;" type="text" value="<?php echo $lname ?>">
         <label hidden="true" id="err_lname" class="invalid-fields">Veuillez entrer votre nom de famille</label>
 
-        <p>Prénom <span id="required">*</span> </p> <input id="prenom" name="prenom"class="form-control" style="width: 250px; margin-bottom: 0px;" type="text" value="<?php ?>">
+        <p>Prénom <span id="required">*</span> </p> <input id="prenom" name="prenom"class="form-control" style="width: 250px; margin-bottom: 0px;" type="text" value="<?php echo $fname ?>">
         <label hidden="true" id="err_fname" class="invalid-fields">Veuillez entrer votre prénom</label>
 
-        <p>Courriel</p> <input name="courriel" disabled class="form-control" style="width: 250px;" type="text" value="<?php ?>">
-        <p>Téléphone à la maison</p> <input id="tel-maison" name="tel-maison" class="form-control" style="width: 250px;" type="text" value="<?php ?>">
-        <p>Téléphone au travail</p> <input id="tel-travail" name="tel-travail" class="form-control" style="width: 250px;" type="text" value="<?php ?>">
-        <p>Téléphone cellulaire</p> <input id="tel-cell=" name="tel-cell" class="form-control" style="width: 250px;" type="text" value="<?php ?>">
+        <p>Courriel</p> <input name="courriel" disabled class="form-control" style="width: 250px;" type="text" value="<?php echo $courriel ?>">
+        <p>Téléphone à la maison</p> <input id="tel-maison" name="tel-maison" class="form-control" style="width: 250px;" type="text" value="<?php echo $no_tel_maison?>">
+        <p>Téléphone au travail</p> <input id="tel-travail" name="tel-travail" class="form-control" style="width: 250px;" type="text" value="<?php echo $no_tel_travail ?>">
+        <p>Téléphone cellulaire</p> <input id="tel-cell=" name="tel-cell" class="form-control" style="width: 250px;" type="text" value="<?php echo $no_tel_cell ?>">
         <p id="legend">Légende: <span id="required">* requis</span></p>
         <input style="margin-top: 10px;" class="btn btn-primary" type="button" value="Enregistrer" onclick="validateForm()">
     </div>

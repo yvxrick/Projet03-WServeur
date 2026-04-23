@@ -1,12 +1,12 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . "app/functions/page_is_active.php";
 $user_id = $_SESSION["user_id"];
-$profil = sprintf("https://projet03-wserveur.alwaysdata.net/private/profil.php?id=%d", $user_id);
+$profil = "https://projet03-wserveur.alwaysdata.net/private/profil.php";
 ?>
 
 <div id="navbar">
     <ul>
-        <li><a href='<?php echo $login ?>'>Déconnexion</a></li>
+        <li><a href='https://projet03-wserveur.alwaysdata.net/private/logout.php'>Déconnexion</a></li>
         <li class='<?php echo page_active("profil", $page) ?>'><a href='<?php echo $profil ?>'>Profil</a></li>
         <li class='<?php echo page_active("index", $page)?>'><a href='https://projet03-wserveur.alwaysdata.net/private/index.php'>Menu principal</a></li>
     </ul>

@@ -68,20 +68,19 @@ function user_is_logged_in() {
 /**
  * Redirige l'utilisateur s'il n'a pas encore de profil.
  * @param mixed $user_email
- * @param mixed $user_id
  * @return bool
  */
-function redirect_if_no_profile($user_email, $user_id) {
+function redirect_if_no_profile($user_email) {
     $user_obj = new user($user_email);
     if (!($user_obj->has_filled_profile())) {
-        header(sprintf("Location: profil.php?id=%d", $user_id));
+        header("Location: profil.php");
         return true;
     }
     return false;
 }
 
 /**
- * Redirige l'utilisateur vers un page HTTP 403 s'il n'a pas le droit d'accéder à la page demandé.
+ * Redirige l'utilisateur vers une page HTTP 403 s'il n'a pas le droit d'accéder à la page demandé.
  * @param mixed $id_to_access
  * @return bool
  */
