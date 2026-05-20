@@ -28,4 +28,5 @@
     <a href="https://projet03-wserveur.alwaysdata.net/private/admin/afficherUtilisateurs.php">Utilisateurs</a>
     <a href="https://projet03-wserveur.alwaysdata.net/private/admin/nettoyageDonnees.php">Nettoyage BD</a>
     <a href="https://projet03-wserveur.alwaysdata.net/private/admin/apercuDesDonnees.php">Aperçu</a>
+    <a href='https://projet03-wserveur.alwaysdata.net/private/logout.php'>Déconnexion</a>
 </nav>
