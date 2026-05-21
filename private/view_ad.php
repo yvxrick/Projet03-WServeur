@@ -34,7 +34,10 @@ $email = $_SESSION["email"];
 logout_if_no_session();
 redirect_if_no_profile($email);
 $ad_author_email = $ad["Courriel"];
-$user_obj = new user($ad_author_email);
+
+$user_obj_ad_owner = new user($ad_author_email);
+$user_obj_session = new user($_SESSION["email"]);
+$showContactButton = !$ads_obj->is_users_ad($user_obj_session->get_id(), $ad_id);
 ?>
 
 <?php
@@ -52,14 +55,14 @@ $ad_date_added = $ad["Parution"];
 $ad_date_modified = $ad["MiseAJour"];
 $ad_photo = $ad["Photo"];
 
-$maison_num = formatPhoneNumber($user_obj->get_tel_maison()) ?? "N/A";
-$travail_num = formatPhoneNumber($user_obj->get_tel_travail()) ?? "N/A";
-$cell_num = formatPhoneNumber($user_obj->get_tel_cellulaire()) ?? "N/A";
+$maison_num = formatPhoneNumber($user_obj_ad_owner->get_tel_maison()) ?? "N/A";
+$travail_num = formatPhoneNumber($user_obj_ad_owner->get_tel_travail()) ?? "N/A";
+$cell_num = formatPhoneNumber($user_obj_ad_owner->get_tel_cellulaire()) ?? "N/A";
 
 
-$show_maison_number = $user_obj->get_house_number_visibility() == "P" ? true : false;
-$show_travail_number = $user_obj->get_work_number_visibility() == "P" ? true : false;
-$show_cell_number = $user_obj->get_phone_number_visibility() == "P" ? true : false;
+$show_maison_number = $user_obj_ad_owner->get_house_number_visibility() == "P" ? true : false;
+$show_travail_number = $user_obj_ad_owner->get_work_number_visibility() == "P" ? true : false;
+$show_cell_number = $user_obj_ad_owner->get_phone_number_visibility() == "P" ? true : false;
 $has_contact_info = $show_maison_number || $show_travail_number || $show_cell_number;
 ?>
 
@@ -109,6 +112,11 @@ $has_contact_info = $show_maison_number || $show_travail_number || $show_cell_nu
                         <?php endif; ?>
                     </div>
                     <div class="mt-auto">
+                        <?php if ($showContactButton): ?>
+                            <a href="<?= sprintf("https://projet03-wserveur.alwaysdata.net/private/contact.php?id=%d", $ad_id) ?>"class="btn btn-success w-100 mb-2">
+                            Contacter →
+                        </a>
+                        <? endif; ?>
                         <a href="index.php" class="btn btn-outline-secondary w-100 mb-2">
                             ← Retour
                         </a>

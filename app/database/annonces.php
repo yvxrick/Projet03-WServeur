@@ -115,6 +115,20 @@ class annonces
         return true;
     }
 
+    /**
+     * Retorune un boolean indiquant si l'annonce existe.
+     * @param mixed $ad_id ID de l'annonce
+     * @return bool
+     */
+    public function ad_exists($ad_id) {
+        $query = "SELECT * FROM annonces WHERE NoAnnonce = ?";
+        $stmt = $this->con->prepare($query);
+        $stmt->bind_param("i", $ad_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
+
     public function get_all_users_add($user_id, $offset)
     {
         return $this->con->query("SELECT a.NoAnnonce, a.DescriptionAbregee, a.Prix, a.Photo, a.Etat, u.Nom, u.Prenom, a.Parution ,c.Description AS Categorie FROM annonces a JOIN utilisateurs u ON a.NoUtilisateur = u.NoUtilisateur JOIN categories c ON a.Categorie = c.NoCategorie WHERE a.NoUtilisateur = '$user_id' ORDER BY a.Parution ASC LIMIT 10 OFFSET $offset")->fetch_all(MYSQLI_ASSOC);
