@@ -1,6 +1,11 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . "app/functions/session_manager.php";
 // Load dynamically the requested page.
 $page = $_GET["p"] ?? null;
+// Sends user to main page if hes already logged in.
+if (user_is_logged_in()) {
+    header("Location: https://projet03-wserveur.alwaysdata.net/private/");
+}
 
 switch ($page) {
     case null:
